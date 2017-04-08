@@ -1,5 +1,5 @@
 from torch.nn.modules.module import Module
-from functions.stn import STNFunction
+from torch_stn.functions.stn import STNFunction
 
 class STN(Module):
     def __init__(self):

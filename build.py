@@ -4,25 +4,25 @@ from torch.utils.ffi import create_extension
 
 #this_file = os.path.dirname(__file__)
 
-sources = ['src/my_lib.c']
-headers = ['src/my_lib.h']
+sources = ['torch_stn/src/my_lib.c']
+headers = ['torch_stn/src/my_lib.h']
 defines = []
 with_cuda = False
 
 if torch.cuda.is_available():
     print('Including CUDA code.')
-    sources += ['src/my_lib_cuda.c']
-    headers += ['src/my_lib_cuda.h']
+    sources += ['torch_stn/src/my_lib_cuda.c']
+    headers += ['torch_stn/src/my_lib_cuda.h']
     defines += [('WITH_CUDA', None)]
     with_cuda = True
 
 this_file = os.path.dirname(os.path.realpath(__file__))
 print(this_file)
-extra_objects = ['src/my_lib_cuda_kernel.cu.o']
+extra_objects = ['torch_stn/src/my_lib_cuda_kernel.cu.o']
 extra_objects = [os.path.join(this_file, fname) for fname in extra_objects]
 
 ffi = create_extension(
-    '_ext.my_lib',
+    'torch_stn._ext.my_lib',
     headers=headers,
     sources=sources,
     define_macros=defines,
